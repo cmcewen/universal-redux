@@ -233,7 +233,20 @@ module.exports = {
       // The Webpack devtool configuration. May affect build times.
       // See https://webpack.github.io/docs/configuration.html#devtool
       */
-      devtool: isProduction ? 'source-map' : 'inline-eval-cheap-source-map'
+      devtool: isProduction ? 'source-map' : 'inline-eval-cheap-source-map',
+
+      module: {
+        loaders: [
+          // { test: /\.jsx?$/, exclude: /node_modules/, loaders: jsLoaders }, // now prepended in merge-configs and merge-babel-config
+          { test: /\.json$/, loader: 'json-loader' },
+          { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
+          { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
+          { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
+          { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
+          { test: /\.(webm|mp4)$/, loader: 'file' },
+          { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' }
+        ]
+      },
     }
   }
 };
